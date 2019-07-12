@@ -3,18 +3,18 @@
 
 
 struct Node {
-	Node() {};
+	Node() { };
+
 	Node(int x_, int y_, int width) { // starting node
 		x = x_;
 		y = y_;
 		g = 0;
-		score = 0;
 		id = x + (y * width);
 		parent = nullptr;
 	}
 
 	Node(Node& p, int x_, int y_, int width) {
-		parent = &p;
+		parent = new Node(p);
 		x = x_;
 		y = y_;
 		id = x + (y * width);
@@ -34,7 +34,7 @@ struct Node {
 
 	int x;
 	int y;
-	Node* parent;
+	Node* parent = nullptr;
 	int score = -1;
 	int g = -1; // movement cost
 	int h = -1; // heuristic

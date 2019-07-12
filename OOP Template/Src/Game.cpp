@@ -7,7 +7,7 @@
 
 #include "A star Pathfinder/Pathfinder.h"
 
-Grid grid(10);
+Grid grid(100);
 Pathfinder* pathfinder;
 
 Game::Game(const char* name, int xpos, int ypos, int width, int height, Uint32 flags) {
@@ -29,8 +29,8 @@ Game::Game(const char* name, int xpos, int ypos, int width, int height, Uint32 f
 	fpsTimer->start();
 	SDL_PollEvent(&event);
 
-	grid.grid[2][9] = 4;
-	grid.grid[9][2] = 5;
+	grid.grid[0][0] = 4;
+	grid.grid[99][99] = 5;
 
 	pathfinder = new Pathfinder(grid.grid);
 }
@@ -51,6 +51,10 @@ void Game::update() {
 		std::cout << avgFPS << std::endl;
 	}
 	grid.update();
+
+	if (countedFrames % 1 == 0) {
+		pathfinder->update(grid.grid);
+	}
 }
 
 void Game::render() {

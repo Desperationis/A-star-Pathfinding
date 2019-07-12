@@ -11,7 +11,7 @@ Grid::Grid(int size) {
 	rect = new Rect(100, 100, 800, 800); // width and height MUST stay the same
 }
 
-// start - red - #ff5258 - rgb(255, 82, 88)
+// start / full path - red - #ff5258 - rgb(255, 82, 88)
 // end - blue - #8d9cff - rgb(141, 156, 255)
 // paths - yellow - #ffe946 - rgb(245, 255, 133)
 // correct path - purple - #ff8fd0 - rgb(255, 143, 208)
@@ -50,16 +50,16 @@ void Grid::render() {
 			switch (grid[row][i]) {
 			case 0:
 				continue;
-			case 1: // paths
+			case 1: // uncalculated paths
 				TM::renderDrawColor(245, 255, 133);
 				break;
 			case 2: // walls
 				TM::renderDrawColor(156, 156, 156);
 				break;
-			case 3: // correct path
+			case 3: // calculated path
 				TM::renderDrawColor(255, 143, 208);
 				break;
-			case 4: // starting node
+			case 4: // starting node / correct path
 				TM::renderDrawColor(255, 82, 88);
 				break;
 			case 5: // ending node

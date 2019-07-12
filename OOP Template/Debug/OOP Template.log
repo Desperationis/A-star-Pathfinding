@@ -1,0 +1,5 @@
+﻿  Pathfinder.cpp
+  Game.cpp
+  Generating Code...
+C:\Users\smart\Desktop\A star Pathfinding\OOP Template\Src\A star Pathfinder\Pathfinder.cpp(33,25): warning C4018:  '<': signed/unsigned mismatch
+  OOP Template.vcxproj -> C:\Users\smart\Desktop\A star Pathfinding\Debug\OOP Template.exe
