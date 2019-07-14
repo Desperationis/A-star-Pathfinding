@@ -53,10 +53,6 @@ void Pathfinder::update(std::vector<std::vector<int>>& grid) {
 			drawnPath = true;
 		}
 	}
-	if (openList.size() == 0) {
-		finished = true;
-		drawnPath = true;
-	}
 
 	if (finished && !drawnPath) {
 		for (auto it = closedList.begin(); it != closedList.end(); it++) {
@@ -66,6 +62,7 @@ void Pathfinder::update(std::vector<std::vector<int>>& grid) {
 			}
 		}
 	}
+
 }
 
 bool Pathfinder::available(int x, int y, std::vector<std::vector<int>>& grid) {
@@ -148,5 +145,6 @@ void Pathfinder::recursePath(Node& node, std::vector<std::vector<int>>& grid) {
 }
 
 bool Pathfinder::isFinished() const {
-	return (finished && drawnPath);
+	//no more path possibilies or the path has been drawn
+	return (openList.size() == 0 || drawnPath);
 }

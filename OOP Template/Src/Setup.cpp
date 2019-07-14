@@ -8,7 +8,7 @@ unsigned int GRID::GRIDSIZE = 150;
 bool GRID::RANDOM_WALLS = true;
 bool GRID::RANDOM_START = true;
 bool GRID::RANDOM_END = true;
-unsigned int GRID::RANDOM_WALLS_CHANCE = 25;
+unsigned int GRID::RANDOM_WALLS_CHANCE = 30;
 
 unsigned int GRID::WIDTH = 900;
 unsigned int GRID::HEIGHT = 900;
