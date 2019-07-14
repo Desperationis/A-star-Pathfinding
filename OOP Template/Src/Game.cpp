@@ -3,12 +3,17 @@
 #include "Tools/Timer.h"
 #include "Tools/InputSystem.h"
 #include "Tools/TM.h"
-#include "Grid/Grid.h"
+#include "Grid/grid.h"
+#include "Knobs/Button.h"
+#include "Setup.h"
 
 #include "A star Pathfinder/Pathfinder.h"
 
-Grid grid(100);
+Grid* grid = nullptr;
 Pathfinder* pathfinder;
+
+enum BUTTONS { AUTORESET, RESET };
+std::vector<Button*> buttons;
 
 Game::Game(const char* name, int xpos, int ypos, int width, int height, Uint32 flags) {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -29,14 +34,31 @@ Game::Game(const char* name, int xpos, int ypos, int width, int height, Uint32 f
 	fpsTimer->start();
 	SDL_PollEvent(&event);
 
-	grid.grid[0][0] = 4;
-	grid.grid[99][99] = 5;
+	grid = new Grid(GRID::GRIDSIZE);
+	grid->load();
 
-	pathfinder = new Pathfinder(grid.grid);
+
+	pathfinder = new Pathfinder(grid->grid);
+
+
+	// It is important they are aligned with their enumerations
+	int x = GRID::X + GRID::WIDTH + 20;
+
+	buttons.push_back(new Button(GRID::AUTORESET, " AUTORESET ", x, 100));
+	buttons.push_back(new Button(GRID::RESET, " RESET ", x, 150));
+
+	buttons.push_back(new Button(GRID::RANDOM_WALLS, " RANDOM WALLS ", x, 250));
+	buttons.push_back(new Button(GRID::RANDOM_START, " RANDOM START ", x, 300));
+	buttons.push_back(new Button(GRID::RANDOM_END, " RANDOM END ", x, 350));
+
+	buttons[RESET]->oneClick = false;
 }
 
 
 void Game::update() {
+	//updates grid
+	grid->update();
+
 	// refreshes frame rate counter
 	if (counter) {
 		if (fpsTimer->getTicks() > 10000) {
@@ -50,18 +72,37 @@ void Game::update() {
 		}
 		std::cout << avgFPS << std::endl;
 	}
-	grid.update();
 
 	if (countedFrames % 1 == 0) {
-		pathfinder->update(grid.grid);
+		pathfinder->update(grid->grid);
 	}
+
+	if ((pathfinder->isFinished() && GRID::AUTORESET) || GRID::GRIDSIZE_CHANGED || GRID::RESET) {
+		GRID::GRIDSIZE_CHANGED = false;
+		delete grid;
+		delete pathfinder;
+
+		grid = new Grid(GRID::GRIDSIZE);
+		grid->load();
+
+		pathfinder = new Pathfinder(grid->grid);
+		GRID::RESET = false;
+	}
+	for (int i = 0; i < buttons.size(); i++) {
+		buttons[i]->update();
+	}
+
 }
 
 void Game::render() {
 	TM::renderClear();
 
-	grid.render();
-	grid.renderGrid();
+	grid->render();
+	grid->renderGrid();
+
+	for (int i = 0; i < buttons.size(); i++) {
+		buttons[i]->render();
+	}
 
 	TM::renderDrawColor(255, 255, 255);
 	TM::renderPresent();

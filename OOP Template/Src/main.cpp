@@ -8,12 +8,12 @@
 
 int main(int argc, char* argv[])
 {
+	srand(static_cast<unsigned int>(time(0)));
 	int FRAMERATE = 60;
 	Game game("Contradictory", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW::WIDTH, WINDOW::HEIGHT, NULL);
 
 	int countedFrames = 0;
 	Timer regulator;
-
 	while (game.isRunning()) {
 		regulator.start();
 

@@ -1,0 +1,5 @@
+
+*.ipch
+.vs/Absolute ECS Template/v16/.suo
+*.db
+*.ipch

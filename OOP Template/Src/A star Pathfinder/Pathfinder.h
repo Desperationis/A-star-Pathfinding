@@ -13,6 +13,7 @@ public:
 	bool available(int x, int y, std::vector<std::vector<int>>& grid); // checks to see if a tile is available
 	void calculate(int x, int y, int xoffset, int yoffset, std::vector<std::vector<int>>& grid);
 	void recursePath(Node& node, std::vector<std::vector<int>>& grid); //recurses to "draw" full path
+	bool isFinished() const;
 private:
 	void calcAdjacent(int x, int y, std::vector<std::vector<int>>& grid); // calculates adjacent tiles and adds them to open list
 

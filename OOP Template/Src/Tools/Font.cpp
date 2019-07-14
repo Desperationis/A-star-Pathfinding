@@ -24,6 +24,7 @@ Font::Font(const char* file, int pt_, SDL_Color& color) {
 
 Font::~Font() {
 	TTF_CloseFont(font);
+	font = nullptr;
 }
 
 const char* Font::getFile() const {

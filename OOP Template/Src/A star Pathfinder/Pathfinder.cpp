@@ -35,17 +35,27 @@ void Pathfinder::update(std::vector<std::vector<int>>& grid) {
 				id = it.value().id;
 			}
 		}
-		closedList[id] = openList[id];
-		openList.erase(id);
+		if (id != -1) {
+			closedList[id] = openList[id];
+			openList.erase(id);
 
 		
-		if (closedList[id].x == goalX && closedList[id].y == goalY) { //only color if it doesn't cover the goal
-			finished = true;
+			if (closedList[id].x == goalX && closedList[id].y == goalY) { //only color if it doesn't cover the goal
+				finished = true;
+			}
+			else {
+				grid[closedList[id].y][closedList[id].x] = 3;
+				calcAdjacent(closedList[id].x, closedList[id].y, grid);
+			}
 		}
 		else {
-			grid[closedList[id].y][closedList[id].x] = 3;
-			calcAdjacent(closedList[id].x, closedList[id].y, grid);
+			finished = true;
+			drawnPath = true;
 		}
+	}
+	if (openList.size() == 0) {
+		finished = true;
+		drawnPath = true;
 	}
 
 	if (finished && !drawnPath) {
@@ -135,4 +145,8 @@ void Pathfinder::recursePath(Node& node, std::vector<std::vector<int>>& grid) {
 		recursePath(*node.parent, grid);
 	}
 	drawnPath = true;
+}
+
+bool Pathfinder::isFinished() const {
+	return (finished && drawnPath);
 }

@@ -8,14 +8,18 @@
 Grid::Grid(int size) {
 	sizeTo(size);
 	gridColor = SDL_Color{ 0,0,0,100 };
-	rect = new Rect(100, 100, 800, 800); // width and height MUST stay the same
+	GRID::Y = (WINDOW::HEIGHT / 2) - (GRID::WIDTH / 2);
+	rect = new Rect(GRID::X, GRID::Y, GRID::WIDTH, GRID::HEIGHT); // width and height MUST stay the same
 }
 
-// start / full path - red - #ff5258 - rgb(255, 82, 88)
-// end - blue - #8d9cff - rgb(141, 156, 255)
-// paths - yellow - #ffe946 - rgb(245, 255, 133)
-// correct path - purple - #ff8fd0 - rgb(255, 143, 208)
-// walls - gray - #9c9c9c - rgb(156, 156, 156)
+Grid::~Grid() {
+	SDL_DestroyTexture(targetTex);
+	targetTex = nullptr;
+
+	delete rect;
+	rect = nullptr;
+}
+
 
 void Grid::update() {
 	int tileSize =  rect->dest.w / gridSize;
@@ -24,21 +28,31 @@ void Grid::update() {
 	int x = ((InputSystem::mouse[InputSystem::MOUSE::X] - rect->dest.x) / tileSize);
 	int y = ((InputSystem::mouse[InputSystem::MOUSE::Y] - rect->dest.y) / tileSize);
 
-	if(InputSystem::mouse[InputSystem::MOUSE::LEFT]) {
-		if (rect->CollidePoint(InputSystem::mouse[InputSystem::MOUSE::X], InputSystem::mouse[InputSystem::MOUSE::Y])) {
-			grid[y][x] = 2; // places wall
+	if (rect->CollidePoint(InputSystem::mouse[InputSystem::MOUSE::X], InputSystem::mouse[InputSystem::MOUSE::Y])) {
+		if (grid[y][x] == 0) {
+			if(InputSystem::mouse[InputSystem::MOUSE::LEFT]) {
+				grid[y][x] = 2; // places wall
+			}
 		}
-	}
-	if (InputSystem::mouse[InputSystem::MOUSE::RIGHT]) {
-		if (rect->CollidePoint(InputSystem::mouse[InputSystem::MOUSE::X], InputSystem::mouse[InputSystem::MOUSE::Y])) {
-			grid[y][x] = 0; // erases wall
+
+		if (grid[y][x] == 2) {
+			if (InputSystem::mouse[InputSystem::MOUSE::RIGHT]) {
+				grid[y][x] = 0; // erases wall
+			}
 		}
 	}
 }
 
+// start / full path - red - #ff5258 - rgb(255, 82, 88)
+// end - blue - #8d9cff - rgb(141, 156, 255)
+// paths - yellow - #ffe946 - rgb(245, 255, 133)
+// correct path - purple - #ff8fd0 - rgb(255, 143, 208)
+// walls - gray - #9c9c9c - rgb(156, 156, 156)
+
 void Grid::render() {
 	int tileSize = rect->dest.w / gridSize;
 	int margin = static_cast<int>(tileSize * 0.0625);
+
 
 	SDL_Rect dest{ 0,0, tileSize - (2 * margin) , tileSize - (2 * margin) };
 	for (unsigned int row = 0; row < grid.size(); row++) {
@@ -111,6 +125,38 @@ void Grid::color(int r, int g, int b) {
 	gridColor.r = r;
 	gridColor.g = g;
 	gridColor.b = b;
+}
+
+void Grid::load() {
+	if (GRID::RANDOM_WALLS) {
+		for (unsigned int i = 0; i < grid.size(); i++) {
+			for (unsigned int j = 0; j < grid[i].size(); j++) {
+				if (rand() % 99 < GRID::RANDOM_WALLS_CHANCE) {
+					grid[i][j] = 2;
+				}
+			}
+		}
+	}
+
+	if (GRID::RANDOM_START) {
+		int x = rand() % GRID::GRIDSIZE;
+		int y = rand() % GRID::GRIDSIZE;
+
+		grid[y][x] = 4;
+	}
+	else {
+		grid[0][0] = 4;
+	}
+
+	if (GRID::RANDOM_END) {
+		int x = rand() % GRID::GRIDSIZE;
+		int y = rand() % GRID::GRIDSIZE;
+
+		grid[y][x] = 5;
+	}
+	else {
+		grid[GRID::GRIDSIZE - 1][GRID::GRIDSIZE - 1] = 5;
+	}
 }
 
 
