@@ -1,5 +1,5 @@
 # A-star-Pathfinding
-![A* Pathfinding Capture](https://desperationis.github.io/img/project/APathfindingCapture.PNG)
+![A* Pathfinding Capture](https://desperationis.github.io/img/project/APathfinding.PNG)
 
 This demo shows how the A* Pathfinding Algorithm can be used for finding the sub-optimal path from one point to another, and it's pretty
 efficient. You can also toggle some settings for viewing experience.
