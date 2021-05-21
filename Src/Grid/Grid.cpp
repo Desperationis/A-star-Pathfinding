@@ -10,6 +10,7 @@ Grid::Grid(int size) {
 	gridColor = SDL_Color{ 0,0,0,100 };
 	GRID::Y = (WINDOW::HEIGHT / 2) - (GRID::WIDTH / 2);
 	rect = new Rect(GRID::X, GRID::Y, GRID::WIDTH, GRID::HEIGHT); // width and height MUST stay the same
+	targetTex = nullptr;
 }
 
 Grid::~Grid() {
