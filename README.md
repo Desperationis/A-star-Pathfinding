@@ -1,5 +1,5 @@
 # A-star-Pathfinding
-![A* Pathfinding GIF](Pathfinding.gif)
+![A* Pathfinding GIF](preview/Pathfinding.gif)
 
 This demo shows how the A* Pathfinding Algorithm can be used for finding the sub-optimal path from one point to another. You can also toggle some settings for viewing experience.
 
