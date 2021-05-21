@@ -11,7 +11,6 @@ target_include_directories(output
 		./
 		./Dependencies/SDL_FULL/include/
 		./Dependencies/hopscotch-map/include/
-		./Src
 		)
 
 link_directories(output

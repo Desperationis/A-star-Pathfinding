@@ -111,22 +111,23 @@ void Game::render() {
 
 bool TAB_PRESSED = false;
 void Game::events() {
-	SDL_PollEvent(&event);
 	InputSystem::PumpEvents();
+	
+	while(SDL_PollEvent(&event)) {
+		switch (event.window.event) {
+		case SDL_WINDOWEVENT_CLOSE:
+			running = false;
+		}
 
-	switch (event.window.event) {
-	case SDL_WINDOWEVENT_CLOSE:
-		running = false;
-	}
+		if (InputSystem::keys[SDL_SCANCODE_ESCAPE]) {
+			running = false;
+		}
 
-	if (InputSystem::keys[SDL_SCANCODE_ESCAPE]) {
-		running = false;
+		if (InputSystem::keys[SDL_SCANCODE_TAB] && !TAB_PRESSED) {
+			counter = !counter;
+		}
+		TAB_PRESSED = InputSystem::keys[SDL_SCANCODE_TAB];
 	}
-
-	if (InputSystem::keys[SDL_SCANCODE_TAB] && !TAB_PRESSED) {
-		counter = !counter;
-	}
-	TAB_PRESSED = InputSystem::keys[SDL_SCANCODE_TAB];
 }
 
 bool Game::isRunning() const {
