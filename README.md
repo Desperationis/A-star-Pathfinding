@@ -18,7 +18,7 @@ In addition to this, you must install the dev versions of [SDL2](https://www.lib
 Then, run `installDependencies.bash` to download other dependencies onto the project directory. After that, you can compile this project by simply running `compile.bash` to compile an executable into `executable/`. It's as easy as that! 
 
 # Compiling on Arch Linux
-To install everything that was said above (and the compilation tools necessary, the command is `pacman -S cmake sdl2 sdl2_image sdl2_ttf base-devel wget`. After that, follow the same steps as Debian to compile.
+To install everything that was said above (and the compilation tools necessary, the command is `pacman -S cmake sdl2 sdl2_image sdl2_ttf base-devel`. After that, follow the same steps as Debian to compile.
 
 # Compiling on Windows
 ## Requirements
