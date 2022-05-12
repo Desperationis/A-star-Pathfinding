@@ -16,12 +16,6 @@ endif()
 
 add_executable(output) # Create a executable from main.cpp
 
-target_include_directories(output 
-		PUBLIC 
-		./
-		./Dependencies/hopscotch-map/include/
-		)
-
 if (WIN32)
 	target_include_directories(output PUBLIC ./Dependencies/SDL_FULL/include)
 endif()
@@ -47,9 +41,11 @@ target_sources(output
 		
 		)
 
+add_subdirectory(Dependencies/hopscotch-map)
 target_link_libraries(output 
 		SDL2main
 		SDL2_image
 		SDL2
 		SDL2_ttf
+		tsl::hopscotch_map
 		)
