@@ -26,19 +26,18 @@ endif()
 
 target_sources(output 
 		PUBLIC 
-		Src/Knobs/Button.cpp
-		Src/main.cpp
-		Src/Grid/Grid.cpp
-		Src/Game.cpp
-		Src/Pathfinder/Pathfinder.cpp
-		Src/Setup.cpp
-		Src/Tools/Font.cpp
-		Src/Tools/TM.cpp
-		Src/Tools/InputSystem.cpp
-		Src/Tools/Timer.cpp
-		Src/Tools/Rect.cpp
-		Src/Tools/FRect.cpp
-		
+		src/Knobs/Button.cpp
+		src/main.cpp
+		src/Grid/Grid.cpp
+		src/Game.cpp
+		src/Pathfinder/Pathfinder.cpp
+		src/Setup.cpp
+		src/Tools/Font.cpp
+		src/Tools/TM.cpp
+		src/Tools/InputSystem.cpp
+		src/Tools/Timer.cpp
+		src/Tools/Rect.cpp
+		src/Tools/FRect.cpp
 		)
 
 add_subdirectory(Dependencies/hopscotch-map)
