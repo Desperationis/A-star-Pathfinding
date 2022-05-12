@@ -31,7 +31,7 @@ After that, download all the files listed below. For each one, there should be a
 * For each archive, unzip the contents of their `include` folder into `third-party/SDL_FULL/include` and `lib/x86` folder into `third-party/SDL_FULL/x86`
 * Move all the .dll files into a separate folder at the root of the project; This is where your executable will run. 
 
-This project also requires the use of[Tessil/hopscotch-map](https://github.com/Tessil/hopscotch-map). Clone / download the source code of [Tessil/hopscotch-map](https://github.com/Tessil/hopscotch-map) via `git submodule update --init --recursive third-party/`. After that, you're all set!
+This project also requires the use of [Tessil/hopscotch-map](https://github.com/Tessil/hopscotch-map). Clone / download the source code of [Tessil/hopscotch-map](https://github.com/Tessil/hopscotch-map) via `git submodule update --init --recursive third-party/`. After that, you're all set!
 
 ## Compiling
 To compile this project, you need to use CMake and your prefered compiler to generate a x86 (32-bit) version of your solution / executable. 
