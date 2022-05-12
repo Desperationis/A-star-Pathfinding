@@ -6,7 +6,7 @@ project(A-star-Pathfinding VERSION 1.0.2) # Set variable PROJECT_NAME
 
 
 if (WIN32)
-	link_directories(${CMAKE_SOURCE_DIR}/Dependencies/SDL_FULL/x86/) # Call before to make sure VS detects it
+	link_directories(${CMAKE_SOURCE_DIR}/third-party/SDL_FULL/x86/) # Call before to make sure VS detects it
 endif()
 
 
@@ -17,7 +17,7 @@ endif()
 add_executable(output) # Create a executable from main.cpp
 
 if (WIN32)
-	target_include_directories(output PUBLIC ./Dependencies/SDL_FULL/include)
+	target_include_directories(output PUBLIC ./third-party/SDL_FULL/include)
 endif()
 
 if(UNIX)
@@ -40,7 +40,7 @@ target_sources(output
 		src/Tools/FRect.cpp
 		)
 
-add_subdirectory(Dependencies/hopscotch-map)
+add_subdirectory(third-party/hopscotch-map)
 target_link_libraries(output 
 		SDL2main
 		SDL2_image
