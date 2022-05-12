@@ -2,5 +2,5 @@
 build/
 .cache/
 compile_commands.json
-Dependencies/
+Dependencies/SDL_FULL
 executable/
