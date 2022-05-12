@@ -15,7 +15,7 @@ This project uses CMake in order to generate a make file. Install CMake through 
 
 In addition to this, you must install the dev versions of [SDL2](https://www.libsdl.org/), [SDL2_image](https://www.libsdl.org/projects/SDL_image/), and [SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf/). On Debian, this can be done by calling `sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev`. 
 
-Then, run `installDependencies.bash` to download other dependencies onto the project directory. After that, you can compile this project by simply running `compile.bash` to compile an executable into `executable/`. It's as easy as that! 
+Then, run `git submodule update --init --recursive Dependencies/` to clone the required submodules onto the project directory. After that, you can compile this project by simply running `compile.bash` to compile an executable into `executable/`. It's as easy as that! 
 
 # Compiling on Arch Linux
 To install everything that was said above (and the compilation tools necessary, the command is `pacman -S cmake sdl2 sdl2_image sdl2_ttf base-devel`. After that, follow the same steps as Debian to compile.
@@ -24,14 +24,14 @@ To install everything that was said above (and the compilation tools necessary, 
 ## Requirements
 Installing prerequisites on Windows is a bit more complicated. First, download the binary executable of [CMake](https://cmake.org/) and install it. Be sure to install the executable that matches your system architecture.
 
-After that, create a folder named `Dependencies`. In that folder, create a folder titles `SDL_FULL` and put two folders named `include` and `x86` inside it; Here is where you put the header files of SDL2, SDL2_image, and SDL_tff in `include` and their x86 .lib files into `x86`. After that, follow these steps
+After that, download all the files listed below. For each one, there should be an `include` and `x86` folder. Merge each one to get a giant `include` and a giant `x86`. Then, in `Dependencies`, create a folder named `SDL_FULL` and put both the giant `include` and `x86` there. 
 * Get the `SDL2-devel-2.0.x` archive from [here](https://www.libsdl.org/release/)
 * Get the `SDL2_image-devel-2.0.x` archive from [here](https://www.libsdl.org/projects/SDL_image/release/)
 * Get the `SDL2_ttf-devel-2.0.x` archive from [here](https://www.libsdl.org/projects/SDL_ttf/release/)
 * For each archive, unzip the contents of their `include` folder into `Dependencies/SDL_FULL/include` and `lib/x86` folder into `Dependencies/SDL_FULL/x86`
 * Move all the .dll files into a separate folder at the root of the project; This is where your executable will run. 
 
-This project also requires the use of[Tessil/hopscotch-map](https://github.com/Tessil/hopscotch-map). Clone / download the source code of [Tessil/hopscotch-map](https://github.com/Tessil/hopscotch-map) and rename the folder for the project as `hopscotch-map` and put it in `Dependencies/`. After that, you're all set!
+This project also requires the use of[Tessil/hopscotch-map](https://github.com/Tessil/hopscotch-map). Clone / download the source code of [Tessil/hopscotch-map](https://github.com/Tessil/hopscotch-map) via `git submodule update --init --recursive Dependencies/`. After that, you're all set!
 
 ## Compiling
 To compile this project, you need to use CMake and your prefered compiler to generate a x86 (32-bit) version of your solution / executable. 
